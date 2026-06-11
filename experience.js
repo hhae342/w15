@@ -878,3 +878,148 @@
     startLoop();
   }
 })();
+
+/* ==========================================================================
+   LOW FREQUENCY — generative waveform art inside .exp-gif
+   Columns of small vertical #19A3FF rectangles stack symmetrically around
+   the horizontal center line, forming a continuous waveform. The wave is a
+   sum of slow drifting sines (low-frequency hum); a bell envelope keeps the
+   center dense and saturated while both edges thin out and fade. Clicking
+   drops a ripple at the pointer: bars around it pulse softly for a few
+   seconds — oscillating, not snapping — then dissolve back into the base
+   wave. No hover interaction. Same SPA-safe sizing pattern as the others.
+   ========================================================================== */
+(function () {
+  var box = document.querySelector('.exp-detail[data-view="lowfrequency"] .exp-gif');
+  if (!box) return;
+  var section = box.closest('.exp-view');
+
+  // replace any earlier graphic in this box
+  Array.prototype.slice.call(box.querySelectorAll('canvas')).forEach(function (el) { el.remove(); });
+
+  var canvas = document.createElement('canvas');
+  var ctx = canvas.getContext('2d');
+  box.appendChild(canvas);
+
+  var COLOR = '25, 163, 255'; // #19A3FF
+  var COL_GAP = 16;     // distance between bar columns
+  var BAR_W = 7;        // bar width (small vertical rectangles)
+  var CELL_H = 16;      // bar slot height (bar + gap)
+  var BAR_H = 11;       // visible bar height
+  var RIPPLE_LIFE = 4500;   // ms a click ripple keeps pulsing
+  var RIPPLE_PERIOD = 1400; // ms per pulse — slow, low-frequency
+  var RIPPLE_SPREAD = 360;  // px reach of a ripple
+
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var W = 0, H = 0;
+  var hasSize = false;
+  var ripples = []; // { x, born }
+  var rafId = null;
+
+  function resize() {
+    var w = box.clientWidth;
+    var h = box.clientHeight;
+    if (!w || !h) { hasSize = false; return; } // view hidden — retry on activate
+    W = w; H = h;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    hasSize = true;
+  }
+
+  // slow layered hum — three drifting sines, seamless forever
+  function baseWave(x, t) {
+    return (
+      Math.sin(x * 0.0050 + t * 0.00042) * 0.45 +
+      Math.sin(x * 0.0023 - t * 0.00027) * 0.35 +
+      Math.sin(x * 0.0094 + t * 0.00060) * 0.20
+    ); // -1..1
+  }
+
+  function draw(now) {
+    rafId = requestAnimationFrame(draw);
+    if (!hasSize) { resize(); if (!hasSize) return; }
+
+    ripples = ripples.filter(function (r) { return now - r.born < RIPPLE_LIFE; });
+
+    ctx.clearRect(0, 0, W, H);
+
+    var midY = H / 2;
+    var cx = W / 2;
+    var sigma = W * 0.30;   // horizontal bell envelope width
+    var maxAmp = H * 0.40;  // wave height at full strength
+
+    for (var x = COL_GAP / 2; x < W; x += COL_GAP) {
+      // center dense & strong, edges faded & low
+      var env = Math.exp(-((x - cx) * (x - cx)) / (2 * sigma * sigma));
+
+      // base low-frequency hum (kept gentle so the shape breathes)
+      var wave = 0.42 + 0.58 * (0.5 + 0.5 * baseWave(x, now));
+
+      // click ripples: a soft repeating pulse radiating from the click x,
+      // fading out over RIPPLE_LIFE
+      var rippleBoost = 0;
+      for (var i = 0; i < ripples.length; i++) {
+        var rp = ripples[i];
+        var age = now - rp.born;
+        var dist = Math.abs(x - rp.x);
+        var reach = Math.exp(-(dist * dist) / (2 * RIPPLE_SPREAD * RIPPLE_SPREAD));
+        var decay = 1 - age / RIPPLE_LIFE;
+        decay *= decay; // ease-out fade
+        // traveling phase → the pulse rolls outward, repeating slowly
+        var pulse = Math.sin((age / RIPPLE_PERIOD - dist / (RIPPLE_SPREAD * 1.6)) * 2 * Math.PI);
+        rippleBoost += reach * decay * pulse * 0.55;
+      }
+
+      var amp = maxAmp * env * Math.max(0.05, wave + rippleBoost);
+      var bars = Math.max(1, Math.round(amp / CELL_H));
+      var colAlpha = 0.18 + 0.82 * env; // edge columns fade out
+
+      // per-column shimmer so neighbouring bars differ slightly, slow and soft
+      var shimmer = 0.5 + 0.5 * Math.sin(x * 0.045 + now * 0.0011);
+
+      for (var b = 0; b < bars; b++) {
+        // bars fade toward the tips of each column stack
+        var tipFade = 1 - (b / bars);
+        var alpha = colAlpha * (0.30 + 0.70 * Math.pow(tipFade, 1.4)) * (0.82 + 0.18 * shimmer);
+        if (alpha > 1) alpha = 1;
+        ctx.fillStyle = 'rgba(' + COLOR + ',' + alpha.toFixed(3) + ')';
+
+        var slotUp = midY - (b + 1) * CELL_H;
+        var slotDn = midY + b * CELL_H;
+        ctx.fillRect(x - BAR_W / 2, slotUp + (CELL_H - BAR_H), BAR_W, BAR_H); // above center
+        ctx.fillRect(x - BAR_W / 2, slotDn + (CELL_H - BAR_H) / 2, BAR_W, BAR_H); // below center
+      }
+    }
+  }
+
+  function startLoop() {
+    if (rafId !== null) return;
+    resize();
+    rafId = requestAnimationFrame(draw);
+  }
+
+  function stopLoop() {
+    if (rafId === null) return;
+    cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+
+  // click = drop a slow vibration ripple at the pointer
+  box.addEventListener('click', function (e) {
+    var r = box.getBoundingClientRect();
+    ripples.push({
+      x: (e.clientX - r.left) / r.width * W,
+      born: performance.now()
+    });
+  });
+
+  window.addEventListener('resize', resize);
+
+  // run only while the lowfrequency view is shown; recalculate on activate
+  var mo = new MutationObserver(function () {
+    if (section.classList.contains('is-active')) startLoop(); else stopLoop();
+  });
+  mo.observe(section, { attributes: true, attributeFilter: ['class'] });
+  if (section.classList.contains('is-active')) startLoop();
+})();

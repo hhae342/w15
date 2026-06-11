@@ -3,7 +3,7 @@
    ========================================================================== */
 
 (function () {
-var targets = document.querySelectorAll('.lb-reveal, .lb-reveal-right, .lb-line-reveal');
+var targets = document.querySelectorAll('.lb-reveal, .lb-reveal-right, .lb-line-reveal, .lb-scroll-title');
   if (!('IntersectionObserver' in window)) {
     targets.forEach(function (el) {
       el.classList.add('is-visible');

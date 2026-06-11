@@ -324,8 +324,45 @@
 /* ==========================================================================
    04 / POP IN  (h: 856)
    ========================================================================== */
+.lb-phrase-stage {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  overflow: visible;
+  padding-top: 430px;
+  margin-top: 0;
+}
+
 .lb-pop {
   height: 856px;
+  background: transparent;
+  z-index: 2;
+}
+
+.lb-scroll-title {
+  position: sticky;
+  top: 430px;
+  z-index: 1;
+  width: 1920px;
+  margin: 0 auto -72px;
+  font-family: var(--font-en, 'Alexandria', sans-serif);
+  font-weight: 400;
+  font-size: 60px;
+  line-height: 72px;
+  letter-spacing: -4.8px;
+  color: var(--gray-75, #aeaeae);
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  filter: blur(18px);
+  transition: opacity 1.4s ease-out, filter 2.2s ease-out;
+  will-change: opacity, filter;
+}
+
+.lb-scroll-title.is-visible {
+  opacity: 1;
+  filter: blur(0);
 }
 
 .lb-pop-01-outer {
@@ -338,6 +375,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 3;
 }
 
 .lb-pop-01 {
@@ -361,6 +399,7 @@
   top: 184px;
   width: 161px;
   height: 274px;
+  z-index: 3;
 }
 
 .lb-pop-03-outer {
@@ -373,6 +412,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 3;
 }
 
 .lb-pop-03 {
@@ -388,6 +428,8 @@
    ========================================================================== */
 .lb-senses-section {
   height: 903px;
+  background: transparent;
+  z-index: 2;
 }
 
 .lb-line-imgs {
@@ -397,6 +439,7 @@
   display: flex;
   gap: 10px;
   align-items: flex-end;
+  z-index: 3;
 }
 
 .lb-line-cell {
@@ -418,6 +461,7 @@
   top: 25px;
   width: 709px;
   height: 738px;
+  z-index: 3;
 }
 
 .lb-scalein-img {
