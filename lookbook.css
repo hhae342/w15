@@ -1,0 +1,592 @@
+/* ==========================================================================
+   CTRL KEY — LOOKBOOK page styles (faithful to Figma 1920px desktop design)
+   All classes prefixed lb- to avoid touching landing page styles.
+   ========================================================================== */
+
+.lb-body {
+  background: var(--gray-100, #ffffff);
+}
+
+/* globals.css adds 230px bottom spacing via main::after for the landing page —
+   the lookbook frame ends flush with its last section */
+.lb-page::after {
+  content: none;
+}
+
+.lb-page {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.lb-section {
+  position: relative;
+  width: 100%;
+  background: var(--gray-100, #ffffff);
+  overflow: hidden;
+}
+
+/* shared image crop wrapper (clips % positioned imgs, hosts reveal/zoom) */
+.lb-crop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.lb-crop img {
+  position: absolute;
+  max-width: none;
+}
+
+.lb-cover {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   Scroll reveal (staggered fade-in) — opacity + translateY(20px) only
+   -------------------------------------------------------------------------- */
+.lb-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  will-change: opacity, transform;
+}
+
+.lb-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lb-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lb-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Subtle hover zoom — image scales inside its clipped card only
+   -------------------------------------------------------------------------- */
+.lb-zoom img {
+  transition: transform 0.6s ease-out;
+}
+
+.lb-zoom:hover img {
+  transform: scale(1.04);
+}
+
+/* ==========================================================================
+   01 / INTRO  (h: 1002)
+   ========================================================================== */
+.lb-intro {
+  height: 1002px;
+}
+
+.lb-intro-visual {
+  position: absolute;
+  top: 0;
+  left: calc(29.17% + 56px);
+  transform: translateX(-50%);
+  width: 1232px;
+  height: 1027px;
+  overflow: hidden;
+}
+
+.lb-intro-visual-img {
+  height: 126.88%;
+  width: 187.94%;
+  left: -34.61%;
+  top: -9.41%;
+}
+
+.lb-slidedown {
+  position: absolute;
+  left: 0;
+  top: 719px;
+  width: 1232px;
+  height: 283px;
+}
+
+.lb-slidedown-img {
+  height: 84.04%;
+  width: 66.49%;
+  left: 2.82%;
+  top: 7.98%;
+}
+
+.lb-intro-panel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 688px;
+  height: 1002px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.lb-typewrite {
+  position: absolute;
+  left: 36px;
+  top: 625px;
+  width: 525px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: #000000;
+  word-break: break-word;
+}
+
+.lb-typewrite-title {
+  font-family: var(--font-en, 'Alexandria', sans-serif);
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -0.48px;
+  line-height: normal;
+}
+
+.lb-typewrite-body {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.32px;
+  line-height: 26px;
+}
+
+/* ==========================================================================
+   02 / IMAGE GRID  (h: 1080)
+   ========================================================================== */
+.lb-grid {
+  height: 1080px;
+}
+
+.lb-card {
+  position: absolute;
+}
+
+/* mouse-xy parallax: --mx/--my are driven by lookbook.js per data-depth,
+   composed after the base translateX(-50%) so resting layout is unchanged */
+.lb-grid .lb-card[data-depth] {
+  will-change: transform;
+}
+
+.lb-grid-01 {
+  left: calc(20.83% + 84px);
+  transform: translateX(-50%) translate3d(var(--mx, 0px), var(--my, 0px), 0);
+  top: 80px;
+  width: 644px;
+  height: 919px;
+}
+
+.lb-grid-01-img {
+  height: 138.76%;
+  width: 110.4%;
+  left: -5.16%;
+  top: -28.94%;
+}
+
+.lb-grid-02 {
+  right: 42px;
+  top: 169px;
+  width: 1048px;
+  height: 956px;
+  transform: translate3d(var(--mx, 0px), var(--my, 0px), 0);
+}
+
+.lb-grid-02-img {
+  height: 131.6%;
+  width: 115.63%;
+  left: -6.99%;
+  top: -20.78%;
+}
+
+.lb-grid-03 {
+  right: calc(66.67% - 1px);
+  top: 128px;
+  width: 416px;
+  height: 529px;
+  transform: translate3d(var(--mx, 0px), var(--my, 0px), 0);
+}
+
+.lb-grid-03-img {
+  height: 135.8%;
+  width: 132.63%;
+  left: -12.83%;
+  top: -4.73%;
+}
+
+.lb-grid-04 {
+  left: calc(79.17% - 41px);
+  transform: translateX(-50%) translate3d(var(--mx, 0px), var(--my, 0px), 0);
+  top: 230px;
+  width: 426px;
+  height: 600px;
+}
+
+.lb-grid-04-img {
+  height: 170.45%;
+  width: 172.36%;
+  left: -12.63%;
+  top: -32.79%;
+}
+
+/* ==========================================================================
+   03 / FIX ROW  (h: 774)
+   ========================================================================== */
+.lb-fix {
+  height: 774px;
+}
+
+.lb-ease {
+  position: absolute;
+  bottom: 0;
+  left: calc(25% + 48px);
+  width: 1392px;
+  height: 591px;
+}
+
+.lb-ease-img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-position: bottom;
+}
+
+.lb-fix-01 {
+  left: calc(4.17% + 119px);
+  transform: translateX(-50%);
+  top: 239px;
+  width: 220px;
+  height: 368px;
+}
+
+.lb-fix-01-img {
+  height: 111.83%;
+  width: 100%;
+  left: 3.28%;
+  top: -7.2%;
+}
+
+.lb-fix-02 {
+  left: calc(16.67% + 69.5px);
+  transform: translateX(-50%);
+  top: 140px;
+  width: 161px;
+  height: 369px;
+}
+
+.lb-fix-02-img {
+  height: 101.38%;
+  width: 166.32%;
+  left: -78.21%;
+  top: -0.03%;
+}
+
+.lb-fix-03 {
+  left: calc(25% + 48px);
+  transform: translateX(-50%);
+  top: 226px;
+  width: 226px;
+  height: 368px;
+}
+
+.lb-fix-03-img {
+  height: 108.52%;
+  width: 126.4%;
+  left: -10.89%;
+  top: -4.19%;
+}
+
+.lb-fix-04 {
+  left: 37.5%;
+  transform: translateX(-50%);
+  top: 55px;
+  width: 220px;
+  height: 368px;
+}
+
+.lb-fix-04-img {
+  height: 100%;
+  width: 284.67%;
+  left: -94.66%;
+  top: 4.35%;
+}
+
+/* ==========================================================================
+   04 / POP IN  (h: 856)
+   ========================================================================== */
+.lb-pop {
+  height: 856px;
+}
+
+.lb-pop-01-outer {
+  position: absolute;
+  left: calc(54.17% - 48.26px);
+  transform: translateX(-50%);
+  top: 90.04px;
+  width: 677.487px;
+  height: 464.15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lb-pop-01 {
+  position: relative;
+  width: 644.897px;
+  height: 410.812px;
+  transform: rotate(-4.88deg);
+  flex: none;
+}
+
+.lb-pop-01-img {
+  height: 100%;
+  width: 91.86%;
+  left: 4.17%;
+  top: 0;
+}
+
+.lb-pop-02 {
+  left: calc(29.17% + 12.5px);
+  transform: translateX(-50%);
+  top: 184px;
+  width: 161px;
+  height: 274px;
+}
+
+.lb-pop-03-outer {
+  position: absolute;
+  left: calc(12.5% + 77px);
+  transform: translateX(-50%);
+  top: 89px;
+  width: 310px;
+  height: 189px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lb-pop-03 {
+  position: relative;
+  width: 310px;
+  height: 189px;
+  transform: rotate(180deg) scaleY(-1);
+  flex: none;
+}
+
+/* ==========================================================================
+   05 / SENSES  (h: 903)
+   ========================================================================== */
+.lb-senses-section {
+  height: 903px;
+}
+
+.lb-line-imgs {
+  position: absolute;
+  left: calc(66.67% + 24px);
+  top: 394px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.lb-line-cell {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  flex: none;
+}
+
+.lb-line-02-img {
+  height: 186.38%;
+  width: 143.84%;
+  left: -38.71%;
+  top: -10.25%;
+}
+
+.lb-scalein {
+  left: 190px;
+  top: 25px;
+  width: 709px;
+  height: 738px;
+}
+
+.lb-scalein-img {
+  height: 128.82%;
+  width: 100%;
+  left: 0;
+  top: -19.6%;
+}
+
+.lb-senses-text {
+  position: absolute;
+  left: 1304px;
+  top: 278px;
+  width: 520px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: #000000;
+  word-break: normal;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.lb-senses-title {
+  width: 100%;
+  font-family: var(--font-en, 'Alexandria', sans-serif);
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -0.48px;
+  line-height: 44px;
+  text-align: right;
+  margin: 0;
+}
+
+
+.lb-senses-sub {
+  width: 100%;
+  font-family: var(--font-en, 'Alexandria', sans-serif);
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.32px;
+  line-height: 32px;
+  text-align: right;
+  margin: 0;
+}
+
+/* ==========================================================================
+   06 / STAGGERED GRID  (h: 1999)
+   ========================================================================== */
+.lb-stagger {
+  height: 1999px;
+}
+
+.lb-row {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.lb-row-1 { top: 0; }
+.lb-row-2 { top: 400px; }
+.lb-row-3 { top: 800px; }
+.lb-row-4 { top: 1200px; }
+
+.lb-cell {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  flex: none;
+}
+
+.lb-cell-white {
+  background: var(--gray-100, #ffffff);
+}
+
+.lb-stagger-05-img {
+  height: 124.88%;
+  width: 99.94%;
+  left: 0.06%;
+  top: -20.59%;
+}
+
+.lb-cell-rot-outer {
+  position: relative;
+  width: 407.224px;
+  height: 407.224px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lb-cell-rot {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  transform: rotate(1.04deg);
+  flex: none;
+}
+
+.lb-stagger-06-img {
+  height: 118.18%;
+  width: 118.18%;
+  left: -9%;
+  top: -7.31%;
+}
+
+.lb-stagger-08-img {
+  height: 133.33%;
+  width: 100%;
+  left: 3.44%;
+  top: -20.79%;
+}
+
+.lb-reveal-right {
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+.lb-reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* Custom cursor - changes every 5 seconds */
+
+body.cursor-1,
+body.cursor-1 a,
+body.cursor-1 button,
+body.cursor-1 .lb-card,
+body.cursor-1 .lb-zoom {
+  cursor: url("img/cursor-01.png") 0 0, auto;
+}
+
+body.cursor-2,
+body.cursor-2 a,
+body.cursor-2 button,
+body.cursor-2 .lb-card,
+body.cursor-2 .lb-zoom {
+  cursor: url("img/cursor-02.png") 0 0, auto;
+}
+
+body.cursor-3,
+body.cursor-3 a,
+body.cursor-3 button,
+body.cursor-3 .lb-card,
+body.cursor-3 .lb-zoom {
+  cursor: url("img/cursor-03.png") 0 0, auto;
+}
+
+/* Text line reveal */
+
+.lb-line-reveal {
+  display: block;
+  overflow: hidden;
+}
+
+.lb-line-reveal span {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 0.9s ease-out;
+}
+
+.lb-line-reveal.is-visible span {
+  transform: translateY(0);
+}

@@ -1,0 +1,647 @@
+/* ==========================================================================
+   CTRL KEY — PRODUCT page styles (faithful to Figma 1920px desktop design)
+   All classes prefixed pd- to avoid touching landing/lookbook styles.
+   ========================================================================== */
+
+.pd-body {
+  background: var(--gray-100, #ffffff);
+}
+
+/* globals.css gives main::after 230px landing-page spacing — the product
+   frame ends 74px below section 06 (Figma frame height 7701px) */
+.pd-page::after {
+  height: 74px;
+}
+
+.pd-section {
+  position: relative;
+  width: 100%;
+  background: var(--gray-100, #ffffff);
+  overflow: hidden;
+  color: var(--gray-0, #000000);
+}
+
+/* shared crop wrapper: clips % positioned imgs */
+.pd-crop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.pd-crop img {
+  position: absolute;
+  max-width: none;
+}
+
+/* fx wrapper fills its positioned parent so animations never move layout */
+.pd-fx {
+  position: absolute;
+  inset: 0;
+}
+
+/* #81cdff soft-light tint over the section 04 photos (from Figma) */
+.pd-tint {
+  position: absolute;
+  inset: 0;
+  background: var(--blue-primary-03, #81cdff);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Scroll-driven entrance animations (IntersectionObserver adds .is-visible)
+   Slow, restrained, no layout shift — positioned wrappers stay put.
+   -------------------------------------------------------------------------- */
+
+/* body text: soft rise + fade */
+.pd-fx-up {
+  position: relative;
+  inset: auto;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1.4s var(--ease-premium, cubic-bezier(0.22, 1, 0.36, 1)),
+              transform 1.4s var(--ease-premium, cubic-bezier(0.22, 1, 0.36, 1));
+  will-change: opacity, transform;
+}
+
+/* large titles: blur → clear */
+.pd-fx-blur {
+  position: relative;
+  inset: auto;
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity 1.8s var(--ease-premium, cubic-bezier(0.22, 1, 0.36, 1)),
+              filter 1.8s var(--ease-premium, cubic-bezier(0.22, 1, 0.36, 1));
+  will-change: opacity, filter;
+}
+
+/* photos: slow fade, scale 1.03 → 1 */
+.pd-fx-img {
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 2s var(--ease-premium, cubic-bezier(0.22, 1, 0.36, 1)),
+              transform 2s var(--ease-premium, cubic-bezier(0.22, 1, 0.36, 1));
+  will-change: opacity, transform;
+}
+
+/* photos: clip-path reveal (bottom-up) */
+.pd-fx-clip {
+  opacity: 0;
+  clip-path: inset(0 0 100% 0);
+  transition: opacity 1.8s var(--ease-premium, cubic-bezier(0.22, 1, 0.36, 1)),
+              clip-path 1.8s var(--ease-premium, cubic-bezier(0.22, 1, 0.36, 1));
+  will-change: opacity, clip-path;
+}
+
+.pd-fx-up.is-visible    { opacity: 1; transform: translateY(0); }
+.pd-fx-blur.is-visible  { opacity: 1; filter: blur(0); }
+.pd-fx-img.is-visible   { opacity: 1; transform: scale(1); }
+.pd-fx-clip.is-visible  { opacity: 1; clip-path: inset(0 0 0 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-fx-up, .pd-fx-blur, .pd-fx-img, .pd-fx-clip {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    clip-path: none;
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   01 / HERO  (h: 1159)
+   ========================================================================== */
+.pd-hero {
+  height: 1159px;
+}
+
+.pd-hero-inner {
+  position: absolute;
+  left: calc(50% - 0.5px);
+  transform: translateX(-50%);
+  top: 219px;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.pd-hero-img {
+  position: relative;
+  width: 919px;
+  height: 817px;
+  flex: none;
+}
+
+.pd-hero-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pd-hero-right {
+  display: flex;
+  align-items: flex-end;
+  flex: none;
+}
+
+.pd-hero-col {
+  display: flex;
+  flex-direction: column;
+  gap: 141px;
+  width: 722px;
+}
+
+.pd-hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 547px;
+  word-break: break-word;
+}
+
+.pd-hero-title {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 600;
+  font-size: 32px;
+  letter-spacing: -0.64px;
+  line-height: 44px;
+  white-space: nowrap;
+}
+
+.pd-hero-desc {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 30px;
+  width: 100%;
+}
+
+.pd-hero-meta {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: -0.36px;
+  line-height: 50px;
+  white-space: nowrap;
+}
+
+.pd-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.pd-detail-label {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 30px;
+  width: 100%;
+}
+
+.pd-detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+}
+
+.pd-divider {
+  position: relative;
+  width: 700px;
+  height: 0;
+}
+
+.pd-divider img {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: -0.5px;
+  width: 100%;
+  height: 1px;
+  max-width: none;
+}
+
+.pd-thumbs {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.pd-thumb {
+  position: relative;
+  width: 230px;
+  height: 159px;
+  flex: none;
+}
+
+.pd-thumb-img-1 { height: 283.25%; width: 262.11%; left: -70.47%;  top: -75.1%; }
+.pd-thumb-img-2 { height: 309.33%; width: 363.31%; left: -274.61%; top: -154.45%; }
+.pd-thumb-img-3 { height: 293.59%; width: 271.68%; left: -74.69%;  top: -193.81%; }
+
+/* ==========================================================================
+   02 / OFFICE WEARABLE  (h: 1021)
+   ========================================================================== */
+.pd-02 {
+  height: 1021px;
+}
+
+.pd-02-main {
+  position: absolute;
+  left: 165px;
+  top: 0;
+  width: 795px;
+  height: 788px;
+}
+
+.pd-02-main-img {
+  height: 157.45%;
+  width: 101.25%;
+  left: -1.25%;
+  top: -9.83%;
+}
+
+.pd-02-col {
+  position: absolute;
+  left: 989px;
+  top: 491px;
+  width: 795px;
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  align-items: flex-end;
+}
+
+.pd-02-title {
+  width: 100%;
+  height: 39.756px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-family: var(--font-en, 'Alexandria', sans-serif);
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: -0.64px;
+  line-height: 44px;
+  text-align: right;
+  word-break: break-word;
+}
+
+.pd-02-side {
+  position: relative;
+  width: 465px;
+  height: 448px;
+  flex: none;
+}
+
+/* mirrored crop (Figma exports this image flipped horizontally) */
+.pd-02-side-img {
+  height: 151.02%;
+  width: 129.67%;
+  left: -18.84%;
+  top: -24.85%;
+  transform: scaleX(-1);
+}
+
+/* ==========================================================================
+   03 / 01 DESIGN LANGUAGE  (h: 842)
+   ========================================================================== */
+.pd-03 {
+  height: 842px;
+}
+
+.pd-03-col {
+  position: absolute;
+  left: 155px;
+  top: 90px;
+  width: 1101px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.pd-03-head {
+  width: 386px;
+  height: 79px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-family: var(--font-en, 'Alexandria', sans-serif);
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: -0.64px;
+  line-height: 44px;
+  word-break: break-word;
+}
+
+.pd-03-row {
+  display: flex;
+  gap: 43px;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.pd-03-img {
+  position: relative;
+  width: 545px;
+  height: 555px;
+  flex: none;
+}
+
+.pd-03-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.pd-03-text {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  width: 513px;
+  word-break: break-word;
+}
+
+.pd-03-sub {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: -0.64px;
+  line-height: 44px;
+  width: 100%;
+}
+
+.pd-03-desc {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 30px;
+  width: 100%;
+}
+
+/* ==========================================================================
+   04 / 02 STRUCTURAL DESIGN  (h: 1046)
+   ========================================================================== */
+.pd-04 {
+  height: 1046px;
+}
+
+.pd-04-head {
+  position: absolute;
+  left: calc(50% - 785px);
+  top: 211px;
+  transform: translateY(-100%);
+  width: 386px;
+  height: 79px;
+}
+
+.pd-04-head-text {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-family: var(--font-en, 'Alexandria', sans-serif);
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: -0.64px;
+  line-height: 44px;
+  word-break: break-word;
+}
+
+.pd-04-caption {
+  position: absolute;
+  left: calc(50% - 785px);
+  top: 1046px;
+  transform: translateY(-100%);
+}
+
+.pd-04-caption p {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 30px;
+  white-space: nowrap;
+}
+
+.pd-04-img {
+  position: absolute;
+  top: 234px;
+  height: 688px;
+}
+
+.pd-04-img-1 { left: 166px;  width: 517px; }
+.pd-04-img-2 { left: 702px;  width: 516px; }
+.pd-04-img-3 { left: 1237px; width: 517px; }
+
+.pd-04-img-1-img { height: 246.15%; width: 440.7%;  left: -47.67%;  top: -5.12%; }
+.pd-04-img-2-img { height: 226.48%; width: 405.46%; left: -57.33%;  top: -119.24%; }
+.pd-04-img-3-img { height: 208.39%; width: 375.03%; left: -237.16%; top: 0.03%; }
+
+/* ==========================================================================
+   05 / 03 SENSORY GROUNDING SYSTEM  (h: 1390)
+   ========================================================================== */
+.pd-05 {
+  height: 1390px;
+}
+
+.pd-05-head {
+  position: absolute;
+  left: 121px;
+  top: 100px;
+  width: 709px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  word-break: break-word;
+}
+
+.pd-05-head-title {
+  width: 386px;
+  height: 132px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-family: var(--font-en, 'Alexandria', sans-serif);
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: -0.64px;
+  line-height: 44px;
+}
+
+.pd-05-head-desc {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 30px;
+  width: 100%;
+}
+
+.pd-05-row {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+}
+
+.pd-05-row-1 {
+  left: 121px;
+  top: 399px;
+  gap: 37px;
+}
+
+.pd-05-row-2 {
+  left: 666px;
+  top: 982px;
+  gap: 31px;
+}
+
+.pd-05-img-1 {
+  position: relative;
+  width: 477px;
+  height: 543px;
+  flex: none;
+}
+
+.pd-05-img-1-img { height: 177.94%; width: 224.14%; left: -71.93%; top: -3.61%; }
+
+.pd-05-img-2 {
+  position: relative;
+  width: 576px;
+  height: 365px;
+  flex: none;
+}
+
+.pd-05-img-2-img { height: 349.47%; width: 393.62%; left: -276.15%; top: -233.66%; }
+
+.pd-05-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 479px;
+  word-break: break-word;
+}
+
+.pd-05-sub {
+  font-family: var(--font-en, 'Alexandria', sans-serif);
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: -0.64px;
+  line-height: 44px;
+  width: 100%;
+}
+
+.pd-05-desc {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 30px;
+  width: 100%;
+}
+
+/* ==========================================================================
+   06 / 04 PRODUCT ANATOMY + 05 MATERIAL DESIGN  (h: 2169)
+   ========================================================================== */
+.pd-06 {
+  height: 2169px;
+  margin-left: -2px;
+  width: 1920px;
+}
+
+.pd-06-row1 {
+  position: absolute;
+  left: 534px;
+  top: 78px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.pd-06-anatomy-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 426px;
+  text-align: right;
+  word-break: break-word;
+}
+
+.pd-06-title {
+  font-family: var(--font-en, 'Alexandria', sans-serif);
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: -0.64px;
+  line-height: 44px;
+  width: 100%;
+}
+
+.pd-06-desc {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 30px;
+  width: 100%;
+}
+
+.pd-06-anatomy-img {
+  position: relative;
+  width: 828px;
+  height: 687px;
+  flex: none;
+}
+
+.pd-06-anatomy-img-img { height: 118.25%; width: 138.6%; left: -4.97%; top: -12.66%; }
+
+.pd-06-col {
+  position: absolute;
+  left: 102px;
+  top: 951px;
+  width: 1714px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pd-06-materials {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  width: 100%;
+}
+
+.pd-06-mat {
+  position: relative;
+  flex: none;
+}
+
+.pd-06-mat-1 { width: 571px; height: 463px; }
+.pd-06-mat-2 { width: 544px; height: 743px; }
+.pd-06-mat-3 { width: 571px; height: 793px; }
+
+.pd-06-mat-1-img { height: 390.45%; width: 423.78%; left: -130.55%; top: -266.1%; }
+.pd-06-mat-2-img { height: 233.15%; width: 426.26%; left: -312.84%; top: -7.51%; }
+.pd-06-mat-3-img { height: 277.99%; width: 516.78%; left: -385.35%; top: -134.55%; }
+
+.pd-06-material-text {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 608px;
+  text-align: left;
+  word-break: break-word;
+}

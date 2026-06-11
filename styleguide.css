@@ -1,0 +1,55 @@
+/* ==========================================================================
+   CTRL KEY — Styleguide (fonts & design tokens from Figma)
+   ========================================================================== */
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600&display=swap');
+
+:root {
+  /* ----- color / gray ----- */
+  --gray-0: #000000;
+  --gray-30: #2e2e2e;
+  --gray-40: #484848;
+  --gray-50: #636363;
+  --gray-55: #717171;
+  --gray-75: #aeaeae;
+  --gray-85: #cecece;
+  --gray-95: #eeeeee;
+  --gray-100: #ffffff;
+
+  /* ----- color / primary blue (Ctrl sky blue) ----- */
+  --blue-primary-01: #56bbff;
+  --blue-primary-02: #2cabff;
+  --blue-primary-03: #81cdff;
+  --blue-04: #a4dbff;
+  --blue-05: #d6efff;
+
+  /* ----- color / primary green (Ctrl lime green) ----- */
+  --green-primary: #b7ff74;
+  --green-02: #d4ffac;
+  --green-03: #e2ffc8;
+  --green-04: #f2ffe6;
+
+  /* ----- misc swatches ----- */
+  --swatch-ink: #030303;
+  --img-placeholder: #908e8e;
+  --bg-soft: #f4f4f4;
+
+  /* ----- typography ----- */
+  --font-kr: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-en: 'Alexandria', sans-serif;
+
+  /* type / size & line (from Figma variables) */
+  --type-h1: 60px;
+  --type-h3: 42px;
+  --type-h4: 34px;
+  --type-body-l: 32px;
+  --type-body-s: 26px;
+  --type-label-m: 18px;
+  --type-caption-s: 16px;
+  --type-label-s: 12px;
+
+  /* ----- motion ----- */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-slow: 1.2s;
+}
