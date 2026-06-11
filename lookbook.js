@@ -98,22 +98,3 @@ var targets = document.querySelectorAll('.lb-reveal, .lb-reveal-right, .lb-line-
     start();
   });
 })();
-
-/* custom cursor rotation */
-(function () {
-  var cursor = 1;
-
-  document.body.classList.add('cursor-1');
-
-  setInterval(function () {
-    document.body.classList.remove('cursor-1', 'cursor-2', 'cursor-3');
-
-    cursor++;
-
-    if (cursor > 3) {
-      cursor = 1;
-    }
-
-    document.body.classList.add('cursor-' + cursor);
-  }, 5000);
-})();

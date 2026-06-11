@@ -7,8 +7,25 @@
   <link rel="stylesheet" href="globals.css">
   <link rel="stylesheet" href="styleguide.css">
   <link rel="stylesheet" href="experience.css">
+  <script src="responsive.js"></script>
 </head>
 <body class="exp-body">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><img src="img/logo.png" alt="CTRL KEY"></a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">home</a>
+        <a href="product.html">product</a>
+        <a href="experience.html" aria-current="page">experience</a>
+        <a href="lookbook.html">lookbook</a>
+      </nav>
+    </div>
+  </header>
+
+  <button class="site-upicon" type="button" aria-label="맨 위로 이동">
+    <img src="img/arrow.svg" alt="">
+  </button>
 
   <main class="exp-page">
 
@@ -239,5 +256,7 @@ Effect     긴장 이완 · 신체 감각 인식</pre>
   </main>
 
   <script src="experience.js" defer></script>
+  <script src="upicon.js" defer></script>
+  <script src="cursor.js" defer></script>
 </body>
 </html>

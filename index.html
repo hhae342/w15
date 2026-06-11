@@ -6,15 +6,25 @@
   <title>CTRL KEY — Through Trauma, Ground in Yourself</title>
   <link rel="stylesheet" href="styleguide.css" />
   <link rel="stylesheet" href="globals.css" />
+  <script src="responsive.js"></script>
 </head>
 <body>
 
-  <!-- Header (hide on scroll down / show on scroll up) -->
-  <header class="site-header" id="siteHeader">
+  <header class="site-header">
     <div class="header-inner">
-      <a href="#top" class="logo">CTRL KEY</a>
+      <a href="index.html" class="logo" aria-current="page"><img src="img/logo.png" alt="CTRL KEY"></a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html" aria-current="page">home</a>
+        <a href="product.html">product</a>
+        <a href="experience.html">experience</a>
+        <a href="lookbook.html">lookbook</a>
+      </nav>
     </div>
   </header>
+
+  <button class="site-upicon" type="button" aria-label="맨 위로 이동">
+    <img src="img/arrow.svg" alt="">
+  </button>
 
   <main id="top">
 
@@ -253,7 +263,9 @@
     <!-- 08 / key visual -->
     <section class="section sec-keyvisual" id="keyvisual">
       <div class="inner">
-        <img class="kv-footage" src="img/keyvisual-footage.jpg" alt="프린터에서 출력되는 CTRL KEY 키 비주얼" />
+        <video class="kv-footage" autoplay muted loop playsinline aria-label="CTRL KEY key visual video">
+          <source src="img/hero-video.mp4" type="video/mp4">
+        </video>
         <div class="kv-panel">
           <div class="kv-title reveal-text">
             <p class="kv-en rv-line"><span class="rv-inner">Through Trauma,</span></p>
@@ -261,7 +273,9 @@
             <p class="kv-kr rv-line"><span class="rv-inner">트라우마의 순간을 지나, 나에게 돌아오다</span></p>
           </div>
 
-          <div class="kv-img-placeholder"></div>
+          <div class="kv-img-placeholder">
+            <img src="img/logo.png" alt="CTRL KEY logo">
+          </div>
 
           <div class="kv-naming fade-up">
             <p class="eyebrow">Naming</p>
@@ -377,5 +391,7 @@
   </main>
 
   <script src="script.js"></script>
+  <script src="upicon.js" defer></script>
+  <script src="cursor.js" defer></script>
 </body>
 </html>

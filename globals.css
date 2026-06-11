@@ -14,6 +14,7 @@ html {
 
 body {
   min-width: 1920px;
+  width: 1920px;
   background: var(--gray-100);
   font-family: var(--font-kr);
   color: var(--gray-0);
@@ -56,6 +57,7 @@ button {
   width: 100%;
   min-width: 1920px;
   z-index: 100;
+  background: var(--gray-100, #ffffff);
   transform: translateY(0);
   transition: transform 0.6s var(--ease-premium), background-color 0.6s ease;
 }
@@ -65,32 +67,98 @@ button {
 }
 
 .site-header.is-solid {
-  background: rgba(255, 255, 255, 0.88);
+  background: var(--gray-100, #ffffff);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
 .site-header .header-inner {
   width: 1920px;
+  height: 66px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px 60px;
+  padding: 0 64px 0 60px;
 }
 
 .site-header .logo {
-  font-family: var(--font-en);
-  font-weight: 500;
-  font-size: 16px;
-  letter-spacing: 0.04em;
-  color: var(--gray-100);
+  display: flex;
+  align-items: center;
+  width: 94px;
+  height: 32px;
   text-decoration: none;
   transition: color 0.6s ease;
 }
 
+.site-header .logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .site-header.is-solid .logo {
-  color: var(--gray-0);
+  color: var(--gray-25, #222222);
+}
+
+.site-header .site-nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  font-family: var(--font-kr);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  letter-spacing: -0.32px;
+  white-space: nowrap;
+}
+
+.site-header .site-nav a {
+  color: var(--gray-25, #222222);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.site-header .site-nav a[aria-current="page"] {
+  color: var(--gray-0, #000000);
+}
+
+.site-header + main {
+  padding-top: 66px;
+}
+
+.site-upicon {
+  position: fixed;
+  right: 122px;
+  bottom: 64px;
+  z-index: 120;
+  width: 70px;
+  height: 70px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #787878;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform 0.22s var(--ease-premium), background-color 0.22s ease;
+}
+
+.site-upicon img {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+.site-upicon:hover,
+.site-upicon.is-pressing {
+  transform: scale(1.12);
 }
 
 /* ==========================================================================
@@ -745,10 +813,10 @@ button {
 
 .kv-footage {
   position: absolute;
-  left: 862px;
-  top: -40px;
-  width: 1059px;
-  height: 1352px;
+  left: 1010px;
+  top: 110px;
+  width: 760px;
+  height: 970px;
   object-fit: cover;
   pointer-events: none;
 }
@@ -793,7 +861,13 @@ button {
   top: 778px;
   width: 681px;
   height: 232px;
-  background: var(--img-placeholder);
+  overflow: hidden;
+}
+
+.kv-img-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .kv-naming {
@@ -1211,7 +1285,11 @@ body.cursor-1 .problem-card,
 body.cursor-1 .goal-card,
 body.cursor-1 .value-card,
 body.cursor-1 .accordion-head {
-  cursor: url("img/cursor-01.png") 0 0, auto;
+  cursor: url("img/cursor-01.png") 36 36, auto;
+}
+
+body.cursor-1 * {
+  cursor: url("img/cursor-01.png") 36 36, auto !important;
 }
 
 body.cursor-2,
@@ -1221,7 +1299,11 @@ body.cursor-2 .problem-card,
 body.cursor-2 .goal-card,
 body.cursor-2 .value-card,
 body.cursor-2 .accordion-head {
-  cursor: url("img/cursor-02.png") 0 0, auto;
+  cursor: url("img/cursor-02.png") 36 36, auto;
+}
+
+body.cursor-2 * {
+  cursor: url("img/cursor-02.png") 36 36, auto !important;
 }
 
 body.cursor-3,
@@ -1231,5 +1313,25 @@ body.cursor-3 .problem-card,
 body.cursor-3 .goal-card,
 body.cursor-3 .value-card,
 body.cursor-3 .accordion-head {
-  cursor: url("img/cursor-03.png") 0 0, auto;
+  cursor: url("img/cursor-03.png") 36 36, auto;
+}
+
+body.cursor-3 * {
+  cursor: url("img/cursor-03.png") 36 36, auto !important;
+}
+
+/* 1920px breakpoint: scale the fixed Figma artboard down for narrower screens. */
+@media (max-width: 1919.98px) {
+  html {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    width: 1920px;
+    min-width: 1920px;
+    overflow-x: hidden;
+    transform-origin: top left;
+    zoom: var(--page-scale, 1);
+  }
 }

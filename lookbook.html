@@ -7,8 +7,25 @@
   <link rel="stylesheet" href="globals.css">
 <link rel="stylesheet" href="styleguide.css">
 <link rel="stylesheet" href="lookbook.css">
+<script src="responsive.js"></script>
 </head>
 <body class="lb-body">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><img src="img/logo.png" alt="CTRL KEY"></a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">home</a>
+        <a href="product.html">product</a>
+        <a href="experience.html">experience</a>
+        <a href="lookbook.html" aria-current="page">lookbook</a>
+      </nav>
+    </div>
+  </header>
+
+  <button class="site-upicon" type="button" aria-label="맨 위로 이동">
+    <img src="img/arrow.svg" alt="">
+  </button>
 
   <main class="lb-page">
 
@@ -206,5 +223,7 @@
   </main>
 
 <script src="lookbook.js" defer></script>
+<script src="upicon.js" defer></script>
+<script src="cursor.js" defer></script>
 </body>
 </html>

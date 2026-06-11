@@ -198,20 +198,4 @@
 
   onHeaderScroll();
 
-  /* --------------------------------------------------------------------
-     6. Cursor image change on click
-     -------------------------------------------------------------------- */
-  var cursorIndex = 1;
-
-  document.body.classList.remove('cursor-1', 'cursor-2', 'cursor-3');
-  document.body.classList.add('cursor-1');
-
-  window.addEventListener('click', function () {
-    document.body.classList.remove('cursor-1', 'cursor-2', 'cursor-3');
-
-    cursorIndex += 1;
-    if (cursorIndex > 3) cursorIndex = 1;
-
-    document.body.classList.add('cursor-' + cursorIndex);
-  });
 })();

@@ -555,7 +555,7 @@ body.cursor-1 a,
 body.cursor-1 button,
 body.cursor-1 .lb-card,
 body.cursor-1 .lb-zoom {
-  cursor: url("img/cursor-01.png") 0 0, auto;
+  cursor: url("img/cursor-01.png") 36 36, auto;
 }
 
 body.cursor-2,
@@ -563,7 +563,7 @@ body.cursor-2 a,
 body.cursor-2 button,
 body.cursor-2 .lb-card,
 body.cursor-2 .lb-zoom {
-  cursor: url("img/cursor-02.png") 0 0, auto;
+  cursor: url("img/cursor-02.png") 36 36, auto;
 }
 
 body.cursor-3,
@@ -571,7 +571,7 @@ body.cursor-3 a,
 body.cursor-3 button,
 body.cursor-3 .lb-card,
 body.cursor-3 .lb-zoom {
-  cursor: url("img/cursor-03.png") 0 0, auto;
+  cursor: url("img/cursor-03.png") 36 36, auto;
 }
 
 /* Text line reveal */

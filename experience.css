@@ -1,0 +1,485 @@
+/* ==========================================================================
+   CTRL KEY — EXPERIENCE page styles (faithful to Figma 1920px desktop design)
+   All classes prefixed exp- to avoid touching other pages' styles.
+   Views: Experience_Home + 5 grounding detail screens (SPA, no reload).
+   ========================================================================== */
+
+.exp-body {
+  background: var(--gray-85, #cecece);
+}
+
+/* globals.css adds 230px bottom spacing via main::after for the landing page —
+   experience frames are exact-height screens */
+.exp-page::after {
+  content: none;
+}
+
+.exp-page {
+  position: relative;
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   View switching — fade + slide, 500ms ease-in-out (driven by experience.js)
+   -------------------------------------------------------------------------- */
+.exp-view {
+  display: none;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.exp-view.is-active {
+  display: block;
+}
+
+/* incoming view starts faded + shifted down, then settles */
+.exp-view.is-entering {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* outgoing view overlays in place while fading + sliding up */
+.exp-view.is-leaving {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(-40px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp-view {
+    transition: none;
+  }
+}
+
+/* shared crop wrapper */
+.exp-crop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.exp-crop img {
+  position: absolute;
+  max-width: none;
+}
+
+/* ==========================================================================
+   EXPERIENCE_HOME  (1920 x 1150, bg gray-85)
+   ========================================================================== */
+.exp-home {
+  height: 1150px;
+  background: var(--gray-85, #cecece);
+}
+
+.exp-home-col {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1924px;
+  height: 1132px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.exp-home-hero {
+  position: relative;
+  width: 100%;
+  height: 462px;
+  flex: none;
+}
+
+.exp-home-hero-img {
+  height: 124.49%;
+  width: 108.93%;
+  left: -5.13%;
+  top: -4.2%;
+}
+
+.exp-home-bottom {
+  position: relative;
+  width: 100%;
+  flex: 1 0 0;
+  min-height: 1px;
+  background: var(--gray-85, #cecece);
+  overflow: hidden;
+}
+
+.exp-home-center {
+  position: absolute;
+  left: calc(50% - 1px);
+  top: calc(50% + 107.5px);
+  transform: translate(-50%, -50%);
+  width: 1922px;
+  display: flex;
+  gap: 1px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.exp-home-spacer-l,
+.exp-home-spacer-r {
+  width: 120px;
+  height: 459px;
+  flex: none;
+}
+
+.exp-home-spacer-m {
+  width: 250px;
+  height: 459px;
+  flex: none;
+}
+
+.exp-home-typewrite {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: var(--gray-30, #2e2e2e);
+  word-break: break-word;
+}
+
+.exp-home-title {
+  font-family: var(--font-en, 'Alexandria', sans-serif);
+  font-weight: 400;
+  font-size: 96px;
+  letter-spacing: -5.76px;
+  line-height: 104px;
+  width: 100%;
+}
+
+.exp-home-sub {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: -0.84px;
+  line-height: 24px;
+  width: 100%;
+}
+
+.exp-home-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex: none;
+}
+
+.exp-method {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 960px;
+  height: 80px;
+  background: var(--gray-85, #cecece);
+  border-bottom: 1px solid var(--gray-0, #000000);
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  flex: none;
+}
+
+.exp-method-label {
+  font-family: var(--font-en, 'Alexandria', sans-serif);
+  font-weight: 400;
+  font-size: 26px;
+  letter-spacing: -0.52px;
+  line-height: 34px;
+  color: var(--gray-0, #000000);
+  white-space: nowrap;
+}
+
+.exp-method-icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  flex: none;
+  overflow: hidden;
+}
+
+.exp-method-icon img {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+/* ==========================================================================
+   EXPERIENCE DETAIL SCREENS  (1920 x 1280, bg white)
+   ========================================================================== */
+.exp-detail {
+  height: 1280px;
+  background: var(--gray-100, #ffffff);
+}
+
+.exp-detail-col {
+  position: absolute;
+  left: calc(50% + 0.5px);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  align-items: center;
+}
+
+.exp-detail-header {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  background: var(--gray-100, #ffffff);
+  overflow: hidden;
+  flex: none;
+}
+
+.exp-detail-titles {
+  position: absolute;
+  left: calc(50% + 0.5px);
+  top: 133px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--gray-0, #000000);
+  word-break: break-word;
+}
+
+.exp-detail-sub {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 35px;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.exp-detail-title {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 600;
+  font-size: 40px;
+  letter-spacing: -0.8px;
+  line-height: 55px;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.exp-back {
+  position: absolute;
+  left: 122px;
+  top: 133px;
+  width: 55px;
+  height: 55px;
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+.exp-back img {
+  position: absolute;
+  left: calc(50% + 0.5px);
+  top: calc(50% - 0.5px);
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+/* gif/video placeholder block from Figma (#516d2d, radius 50) */
+.exp-gif {
+  width: 1825px;
+  height: 700px;
+  background: #516d2d;
+  border-radius: 50px;
+  flex: none;
+}
+
+.exp-detail-under {
+  position: relative;
+  width: 100%;
+  height: 306px;
+  background: var(--gray-100, #ffffff);
+  overflow: hidden;
+  flex: none;
+}
+
+.exp-detail-body {
+  position: absolute;
+  left: 121px;
+  top: 60px;
+  width: 1676px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.exp-detail-label {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 32px;
+  color: var(--gray-0, #000000);
+  white-space: nowrap;
+  flex: none;
+}
+
+.exp-detail-spacer {
+  width: 171px;
+  height: 51px;
+  flex: none;
+}
+
+.exp-detail-desc {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: -0.36px;
+  line-height: 30px;
+  color: var(--gray-0, #000000);
+  white-space: nowrap;
+  flex: none;
+}
+
+.exp-detail-grow {
+  flex: 1 0 0;
+  height: 51px;
+  min-width: 1px;
+}
+
+.exp-detail-spec {
+  font-family: var(--font-kr, 'Pretendard Variable', Pretendard, sans-serif);
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.32px;
+  line-height: 26px;
+  color: var(--gray-40, #484848);
+  white-space: pre;
+  margin: 0;
+  flex: none;
+}
+
+/* ==========================================================================
+   BREATHING — canvas pixel-wave inside the gif box (white, same geometry)
+   Only the breathing view's .exp-gif changes; other screens stay #516d2d.
+   ========================================================================== */
+.exp-detail[data-view="breathing"] .exp-gif {
+  background: #ffffff;
+  position: relative;
+  overflow: hidden; /* keep the wave clipped to the rounded box */
+}
+
+.exp-detail[data-view="breathing"] .exp-gif canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==========================================================================
+   TEMPERATURE — gradient-loop canvas inside the gif box (white, same geometry)
+   Only the temperature view's .exp-gif changes; other screens stay as-is.
+   ========================================================================== */
+.exp-detail[data-view="temperature"] .exp-gif {
+  background: #ffffff;
+  position: relative;
+  overflow: hidden; /* keep the gradient clipped to the rounded box */
+}
+
+.exp-detail[data-view="temperature"] .exp-gif canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==========================================================================
+   VIBRATION — pixel-wave canvas inside the gif box (white, same geometry)
+   Only the vibration view's .exp-gif changes; other screens stay as-is.
+   ========================================================================== */
+.exp-detail[data-view="vibration"] .exp-gif {
+  background: #ffffff;
+  position: relative;
+  overflow: hidden; /* keep the pixel waves clipped to the rounded box */
+}
+
+.exp-detail[data-view="vibration"] .exp-gif canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==========================================================================
+   PRESSURE — pressed-surface canvas inside the gif box (white, same geometry)
+   Only the pressure view's .exp-gif changes; other screens stay as-is.
+   ========================================================================== */
+.exp-detail[data-view="pressure"] .exp-gif {
+  background: #ffffff;
+  position: relative;
+  overflow: hidden; /* keep the pressure field clipped to the rounded box */
+  cursor: pointer;
+}
+
+.exp-detail[data-view="pressure"] .exp-gif canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==========================================================================
+   LOW FREQUENCY — vertical line rhythm canvas (white, same geometry)
+   Only the lowfrequency view's .exp-gif changes; other screens stay as-is.
+   ========================================================================== */
+.exp-detail[data-view="lowfrequency"] .exp-gif {
+  background: #ffffff;
+  position: relative;
+  overflow: hidden; /* keep the stripes clipped to the rounded box */
+}
+
+.exp-detail[data-view="lowfrequency"] .exp-gif canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ========================================================================== 
+   PRESSURE — soft radial pressure blobs (white box, existing geometry)
+   ========================================================================== */
+.exp-detail[data-view="pressure"] .exp-gif {
+  background: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.exp-detail[data-view="pressure"] .exp-gif .pressure-blob-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
