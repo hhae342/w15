@@ -483,3 +483,13 @@
   pointer-events: none;
 }
 
+
+/* ==========================================================================
+   Wide-screen fix (viewport > 1920px): the hero gradient stretches to the
+   real viewport width so the right side never shows empty. The Grounding
+   text/list stay pinned to the 1920 artboard. No change at 1920 and below.
+   ========================================================================== */
+.exp-home-hero {
+  width: 100vw;
+  min-width: 1924px;
+}

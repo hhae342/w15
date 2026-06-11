@@ -1329,3 +1329,30 @@ body.cursor-3 .accordion-head {
 body.cursor-3 * {
   cursor: url("img/cursor-03.png") 36 36, auto !important;
 }
+
+/* ==========================================================================
+   Wide-screen fix (viewport > 1920px, e.g. MacBook 16" "More Space")
+   Text and layout stay pinned to the centered 1920px artboard; only the
+   full-bleed footage/background images stretch to the real viewport width
+   so no empty strip shows on the right. At 1920px and below nothing changes.
+   ========================================================================== */
+.sec-intro,
+.sec-overview {
+  overflow: hidden;
+}
+
+.sec-intro .inner,
+.sec-overview .inner {
+  overflow: visible;
+}
+
+.sec-intro .intro-hero-img,
+.sec-overview .overview-bg {
+  inset: auto;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  min-width: 1920px;
+  height: 100%;
+}
