@@ -14,7 +14,6 @@ html {
 
 body {
   min-width: 1920px;
-  width: 1920px;
   background: var(--gray-100);
   font-family: var(--font-kr);
   color: var(--gray-0);
@@ -1318,20 +1317,4 @@ body.cursor-3 .accordion-head {
 
 body.cursor-3 * {
   cursor: url("img/cursor-03.png") 36 36, auto !important;
-}
-
-/* 1920px breakpoint: scale the fixed Figma artboard down for narrower screens. */
-@media (max-width: 1919.98px) {
-  html {
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  body {
-    width: 1920px;
-    min-width: 1920px;
-    overflow-x: hidden;
-    transform-origin: top left;
-    zoom: var(--page-scale, 1);
-  }
 }
